@@ -1,0 +1,59 @@
+#include<iostream>
+#include<ctime>
+#include<cstdlib>
+using namespace std;
+void suffle(int *a,int s, int e)
+{	int j;
+srand(time(NULL));
+	for(int i=e;i>0;i--)
+	{
+		j=rand()%(i+1);
+		swap(a[i],a[j]);
+	}
+}
+int partation(int *a,int s,int e)
+{
+	int i=s-1;
+	int j=s;
+	int pivot=a[e];
+	for(j;j<e;j++)
+	{
+		if(a[j]<=pivot)
+		{
+			i++;
+			swap(a[i],a[j]);
+		}
+	}
+	swap(a[i+1],a[e]);
+	return i+1;
+}
+void Quicksort(int *a,int s,int e)
+{
+	 if(s>=e)
+	 {
+	 	return;
+	 }
+	 int p=partation(a,s,e);
+	 Quicksort(a,s,p-1);
+	 Quicksort(a,p+1,e);
+	 
+	 
+}
+int main()
+{
+	int a[]={1,2,3,4,5,6,7};
+	int N=sizeof(a)/sizeof(int);
+	suffle(a,0,N);	
+	for(int i=0;i<N;i++)
+	{
+		cout<<a[i];
+	}
+	cout<<"\n";
+	Quicksort(a,0,N-1);
+	for(int i=0;i<N;i++)
+	{
+		cout<<a[i];
+	}
+	return 0;
+	
+}
